@@ -55,6 +55,18 @@ class Tree
     node
   end
 
+  def find(data, node = root)
+    return nil if node.nil?
+
+    if data < node.data
+      find(data, node.left)
+    elsif data > node.data
+      find(data, node.right)
+    else
+      node
+    end
+  end
+
   #private method
   def get(node)
      current = node
@@ -68,12 +80,12 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
+  
 end
 
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 
 test = Tree.new(array)
 
-test.delete(8)
-
+p test.level_order
 test.pretty_print
