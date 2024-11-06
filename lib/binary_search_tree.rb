@@ -89,7 +89,7 @@ class Tree
   def level_order(node = root)
     h = height(node)
     for a in 1.. h
-      print_current(node,a)
+       print_current(node,a)
     end
   end
 
@@ -113,6 +113,36 @@ class Tree
 
   end
 
+  def inorder(node = root)
+    return nil if node.nil?
+
+    inorder(node.left)
+
+    puts node.data
+
+    inorder(node.right)
+  end
+
+  def preorder(node = root)
+    return nil if node.nil?
+
+    puts node.data
+
+    preorder(node.left)
+
+    preorder(node.right)
+  end
+
+  def postorder(node = root)
+    return nil if node.nil?
+
+    postorder(node.left)
+
+    postorder(node.right)
+
+    puts node.data
+  end
+
   #private method
   def get(node)
      current = node
@@ -134,4 +164,4 @@ test = Tree.new(array)
 
 test.pretty_print
 
-p test.level_order
+test.postorder
