@@ -143,6 +143,24 @@ class Tree
     puts node.data
   end
 
+  def depth(node = root, x)
+    return -1 if node.nil?
+
+    dist = -1
+
+    return dist + 1 if node.data == x
+
+    dist = depth(node.left, x)
+    if dist >= 0
+      return dist + 1
+    end
+    dist = depth(node.right, x)
+    if dist >= 0
+      return dist + 1
+    end
+    dist
+  end
+
   #private method
   def get(node)
      current = node
@@ -164,4 +182,4 @@ test = Tree.new(array)
 
 test.pretty_print
 
-test.postorder
+
