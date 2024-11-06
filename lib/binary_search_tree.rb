@@ -67,6 +67,52 @@ class Tree
     end
   end
 
+  # iterative level order
+  # def level_order(node = root)
+  #   return nil if node.nil?
+  #   queue = Array.new
+  #   queue << node
+  #   level = Array.new
+
+  #   until queue.empty?
+  #     current = queue[0]
+  #     puts current
+  #     level << queue.shift.data
+  #     puts level
+  #     queue << current.left unless current.left.nil?
+  #     queue << current.right unless current.right.nil?
+  #   end
+  #   level
+  # end
+
+  #Recursive level order
+  def level_order(node = root)
+    h = height(node)
+    for a in 1.. h
+      print_current(node,a)
+    end
+  end
+
+  def height(node = root)
+    return 0 if node.nil?
+
+    hleft = height(node.left)
+    hright = height(node.right)
+    hleft > hright ? hleft + 1 : hright + 1 
+  end
+
+  def print_current(node = root, level)
+    return nil if node.nil?
+
+    if level == 1
+      puts node.data
+    elsif level > 1
+      print_current(node.left, level - 1)
+      print_current(node.right, level - 1)
+    end
+
+  end
+
   #private method
   def get(node)
      current = node
@@ -80,12 +126,12 @@ class Tree
     pretty_print(node.left, "#{prefix}#{is_left ? '    ' : '│   '}", true) if node.left
   end
 
-  
 end
 
 array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 
 test = Tree.new(array)
 
-p test.level_order
 test.pretty_print
+
+p test.level_order
