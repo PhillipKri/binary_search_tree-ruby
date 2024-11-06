@@ -115,7 +115,7 @@ class Tree
 
   def inorder(node = root)
     return nil if node.nil?
-
+    
     inorder(node.left)
 
     puts node.data
@@ -161,6 +161,15 @@ class Tree
     dist
   end
 
+  def balanced?(node = root)
+    diff = height(node.left) - height(node.right)
+    diff === 0 
+  end
+
+  def rebalance(node = root)
+    initialize(inorder(node))
+  end
+
   #private method
   def get(node)
      current = node
@@ -176,10 +185,35 @@ class Tree
 
 end
 
-array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
+# array = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 
-test = Tree.new(array)
+# test = Tree.new(array)
+
+# test.pretty_print
+
+# puts test.balanaced?
+
+a = (Array.new(15) {rand(1..100)})
+
+test = Tree.new(a)
 
 test.pretty_print
+
+puts test.balanced?
+
+test.inorder
+
+test.preorder
+
+test.postorder
+
+test.insert(104)
+
+test.insert(246)
+
+test.insert(567)
+test.pretty_print
+
+puts test.balanced?
 
 
